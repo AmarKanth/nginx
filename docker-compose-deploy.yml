@@ -12,8 +12,7 @@ services:
             - POSTGRES_PASSWORD=postgres
         networks:
             - mynetwork
-    web1:
-        hostname: djangoapp1
+    web:
         build: .
         restart: always
         entrypoint: ["sh", "/app/entrypoint.sh"]
@@ -21,49 +20,7 @@ services:
             - .:/app
             - static-data:/vol/web
         ports:
-            - "8001:8000"
-        environment:
-            - DB_HOST=db
-            - DB_NAME=postgres
-            - DB_USER=postgres
-            - DB_PASSWORD=postgres
-            - DEBUG=1
-            - DJANGO_SECRET_KEY=changeme
-        depends_on:
-            - db
-        networks:
-            - mynetwork
-    web2:
-        hostname: djangoapp2
-        build: .
-        restart: always
-        entrypoint: ["sh", "/app/entrypoint.sh"]
-        volumes:
-            - .:/app
-            - static-data:/vol/web
-        ports:
-            - "8002:8000"
-        environment:
-            - DB_HOST=db
-            - DB_NAME=postgres
-            - DB_USER=postgres
-            - DB_PASSWORD=postgres
-            - DEBUG=1
-            - DJANGO_SECRET_KEY=changeme
-        depends_on:
-            - db
-        networks:
-            - mynetwork
-    web3:
-        hostname: djangoapp3
-        build: .
-        restart: always
-        entrypoint: ["sh", "/app/entrypoint.sh"]
-        volumes:
-            - .:/app
-            - static-data:/vol/web
-        ports:
-            - "8003:8000"
+            - "8000:8000"
         environment:
             - DB_HOST=db
             - DB_NAME=postgres
@@ -84,9 +41,7 @@ services:
         volumes:
             - static-data:/vol/web
         depends_on:
-            - web1
-            - web2
-            - web3
+            - web
         networks:
             - mynetwork
 
