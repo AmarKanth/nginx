@@ -45,16 +45,16 @@ services:
         depends_on:
             - web
         volumes:
-            - certbot-web:/var/www/certbot
-            - certbot-certs:/etc/letsencrypt
+            - ./certbot/www:/var/www/certbot
+            - ./certbot/conf:/etc/letsencrypt
         networks:
             - mynetwork
     certbot:
         build:
             context: ./certbot
         volumes:
-            - certbot-web:/var/www/certbot
-            - certbot-certs:/etc/letsencrypt
+            - ./certbot/www:/var/www/certbot
+            - ./certbot/conf:/etc/letsencrypt
 
 networks:
     mynetwork:
@@ -63,5 +63,3 @@ networks:
 volumes:
     dev-db-data:
     static-data:
-    certbot-web:
-    certbot-certs:
