@@ -1,1 +1,5 @@
-FROM certbot/certbot:latest
+FROM certbot/certbot
+
+RUN apk update && apk add bash
+
+ENTRYPOINT ["/bin/bash"]
