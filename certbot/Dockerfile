@@ -1,5 +1,5 @@
 FROM certbot/certbot
 
-RUN apk update && apk add bash
-
-ENTRYPOINT ["/bin/bash"]
+COPY certify-init.sh /scripts
+RUN chmod +x /scripts/certify-init.sh
+ENTRYPOINT ["/scripts/certify-init.sh"]
