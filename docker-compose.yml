@@ -10,10 +10,10 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
     web:
-        build: .
+        build: ./api
         entrypoint: ["sh", "/app/entrypoint.sh"]
         volumes:
-            - .:/app
+            - ./api:/app
         ports:
             - "8000:8000"
         environment:

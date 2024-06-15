@@ -13,11 +13,10 @@ services:
         networks:
             - mynetwork
     web:
-        build: .
+        build: ./api
         restart: always
         entrypoint: ["sh", "/app/entrypoint.sh"]
         volumes:
-            - .:/app
             - static-data:/vol/web
         ports:
             - "8000:8000"
@@ -35,18 +34,17 @@ services:
     proxy:
         build:
             context: ./proxy
-        hostname: proxy
         restart: always
+        entrypoint: ["sh", "entrypoint.sh"]
+        volumes:
+            - static-data:/vol/web
+            - certbot-www:/var/www/certbot
+            - certbot-conf:/etc/letsencrypt
         ports:
             - "80:80"
             - "443:443"
-        volumes:
-            - static-data:/vol/web
         depends_on:
             - web
-        volumes:
-            - certbot-www:/var/www/certbot
-            - certbot-conf:/etc/letsencrypt
         networks:
             - mynetwork
     certbot:
