@@ -6,4 +6,4 @@ secretGenerator:
     literals:
       - secret=secretkey123
 resources:
-  - postgres.yaml
+  - postgres.yml
