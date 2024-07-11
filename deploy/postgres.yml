@@ -63,9 +63,9 @@ spec:
               mountPath: /var/lib/postgresql/data
           env:
             - name: POSTGRES_DB
-              value: djangodb
+              value: postgres
             - name: POSTGRES_USER
-              value: djangouser
+              value: postgres
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
